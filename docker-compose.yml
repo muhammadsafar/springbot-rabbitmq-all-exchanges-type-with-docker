@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  rabbitmq:
+    container_name: rabbitmq-docker-compose
+    image: rabbitmq:3.11.20-management
+    networks:
+      rabbitmqnetwork:
+
+  springboot-rabbitmq-all-exchanges-docker:
+    container_name: springboot-rabbitmq-all-exchanges-docker-compose
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      rabbitmqnetwork:
+
+    restart: on-failure
+
+networks:
+  rabbitmqnetwork:
